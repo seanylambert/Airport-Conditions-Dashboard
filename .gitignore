@@ -1,0 +1,9 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Env files (API keys, config)
+.env
+
+# macOS Finder metadata
+.DS_Store
