@@ -1,0 +1,15 @@
+strong {
+  color: #0077cc; /* Change text color */
+  font-weight: bold; /* Optional, since <strong> is bold by default */
+  font-size: 1.1em;  /* Optional: slightly larger text */
+}
+
+table td strong {
+  color: #0077cc;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+span {
+    color: magenta
+}

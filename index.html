@@ -1,1 +1,40 @@
-<!-- main webpage -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Conditions</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+
+  <h1>Flight Conditions</h1>
+<div id="searchForm">
+  <label for="airportInput">ICAO Code:</label>
+  <br>
+  <input type="text" id="airportInput" placeholder="eg. KRHV" maxlength="4">
+  <button id="fetchBtn">Get Conditions</button>
+</div>
+
+<div id="metarSection" style="display: none;">
+  <h2>Current METAR Conditions</h2>
+
+  <p><span id="rawMetar">Loading...</span></p>
+
+  <table>
+    <tbody>
+      <tr><td><strong>Airport</strong></td><td id="name"></td></tr>
+      <tr><td><strong>Observed At</strong></td><td id="obsTime"></td></tr>
+      <tr><td><strong>Temperature</strong></td><td id="temp"></td></tr>
+      <tr><td><strong>Dew Point</strong></td><td id="dewp"></td></tr>
+      <tr><td><strong>Wind</strong></td><td id="wind"></td></tr>
+      <tr><td><strong>Visibility</strong></td><td id="visib"></td></tr>
+      <tr><td><strong>Altimeter</strong></td><td id="altim"></td></tr>
+      <tr><td><strong>Clouds</strong></td><td id="clouds"></td></tr>
+    </tbody>
+  </table>
+</div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
