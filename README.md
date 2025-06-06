@@ -14,9 +14,15 @@ git push -u origin main -->
 
 <!-- git checkout -b feature/setup-dashboard -->
 <!-- 
-    git add .
-    git commit -m "Initial dashboard layout"
-    git push --set-upstream origin feature/setup-dashboard -->
+git add .
+git commit -m "Initial dashboard layout"
+git push --set-upstream origin <currentBranchName>
+
+
+git checkout main          # switch to main branch
+git pull origin main       # update it with the latest from GitHub
+git checkout -b <newBranchName>
+-->
 
 
 
