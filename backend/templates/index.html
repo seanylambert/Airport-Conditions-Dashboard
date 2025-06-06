@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flight Conditions</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
 
@@ -12,7 +12,7 @@
 <div id="searchForm">
   <label for="airportInput">ICAO Code:</label>
   <br>
-  <input type="text" id="airportInput" placeholder="eg. KRHV" maxlength="4">
+  <input type="text" id="airportInput" placeholder="eg. KRHV" maxlength="4" required>
   <button id="fetchBtn">Get Conditions</button>
 </div>
 
@@ -35,6 +35,19 @@
   </table>
 </div>
 
-  <script src="assets/js/main.js"></script>
+  <h1>Historic METAR</h1>
+
+<form id="icao-form">
+  <label for="icao">ICAO Code:</label>
+  <br>
+  <input type="text" id="icao" placeholder="eg. KRHV" name="icao" required />
+  <button type="submit">Get Historic Data</button>
+</form>
+
+<div id="results">
+  <!-- Historic METAR data will be inserted here -->
+</div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

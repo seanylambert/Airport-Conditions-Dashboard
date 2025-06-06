@@ -1,7 +1,7 @@
-# FlightConditionsDashboard
+# Flight Conditions Dashboard
 <!-- Explain what the project is and how to run it -->
 Local Development URL:  
-http://127.0.0.1:8000/index.html
+http://127.0.0.1:5000
 
 TERMINAL COMMANDS  
 Start HTTP web server:
@@ -14,9 +14,25 @@ Run Flask App:
 python backend/app.py    
 ``` 
 
+Fetch and Insert METAR Data
+```bash
+python backend/database/insert_metar.py
+
+# response
+ℹ️ No new METAR for KRHV
+ℹ️ No new METAR for KJFK
+ℹ️ No new METAR for KSJC
+⏱ Waiting 30 minutes...
+```
+
 Recreate the Virtual Environment:
 ```bash
 conda env create -f environment.yml
+```
+
+Create a postgreSQL Database
+```bash
+createdb -h localhost -p <port(5432)> -U postgres <databaseName>
 ```
 
 <!-- 
@@ -43,6 +59,8 @@ git pull origin main       # update it with the latest
 git checkout -b <newBranchName>
 -->
 
+Sample METAR Data from  
+https://aviationweather.gov/api/data/metar?ids=KRHV&format=json  
     [{  'metar_id': 770278864, 
         'icaoId': 'KRHV', 
         'receiptTime': '2025-06-05 19:50:21', 
@@ -81,10 +99,10 @@ git checkout -b <newBranchName>
 
 
 
-CSS NOTES
+CSS NOTES  
 All the styling is handled by Tailwind’s compiler, which parses the class string and generates the appropriate CSS behind the scenes.
 ```bash
-<div class="z-40 w-full transition-[top] ltr:left-0 rtl:right-0 group-[.non-sticky-nav]:top-[-72px] group-[.non-sticky-nav]:fixed group-[.non-sticky-nav]:xl:px-8 group-[.sticky-nav]:!top-0 duration-[400ms] ease-out"> 
+<div class="z-40 w-full transition-[top] ltr:left-0 rtl:right-0 group-[.non-sticky-nav]:top-[-72px] group-[.non-sticky-nav]:fixed group-[.non-sticky-nav]:xl:px-8 group-[.sticky-nav]:!top-0 duration-[400ms] ease-out">
 
 z-40                             --> z-index: 40;
 w-full                           --> width: 100%;
