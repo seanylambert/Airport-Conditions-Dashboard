@@ -1,8 +1,9 @@
 # FlightConditionsDashboard
 <!-- Explain what the project is and how to run it -->
-Local Development URL: http://127.0.0.1:8000/index.html
+Local Development URL:  
+http://127.0.0.1:8000/index.html
 
-TERMINAL COMMANDS
+TERMINAL COMMANDS  
 Start HTTP web server:
 ```bash 
 python -m http.server 8000
