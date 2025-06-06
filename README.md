@@ -1,13 +1,22 @@
 # FlightConditionsDashboard
 <!-- Explain what the project is and how to run it -->
-Local Development URL:
-http://127.0.0.1:8000/index.html
+Local Development URL: http://127.0.0.1:8000/index.html
 
+TERMINAL COMMANDS
+Start HTTP web server:
+```bash 
+python -m http.server 8000
+```
 
-<!-- 
-## recreate the environment
+Run Flask App: 
+```bash
+python backend/app.py    
+``` 
+
+Recreate the Virtual Environment:
+```bash
 conda env create -f environment.yml
--->
+```
 
 <!-- 
 git remote add origin https://github.com/seanylambert/FlightConditionsDashboard.git
@@ -73,7 +82,9 @@ git checkout -b <newBranchName>
 
 CSS NOTES
 All the styling is handled by Tailwind’s compiler, which parses the class string and generates the appropriate CSS behind the scenes.
+```bash
 <div class="z-40 w-full transition-[top] ltr:left-0 rtl:right-0 group-[.non-sticky-nav]:top-[-72px] group-[.non-sticky-nav]:fixed group-[.non-sticky-nav]:xl:px-8 group-[.sticky-nav]:!top-0 duration-[400ms] ease-out"> 
+
 z-40                             --> z-index: 40;
 w-full                           --> width: 100%;
 transition-[top]                 --> transition-property: top;
@@ -85,6 +96,7 @@ group-[.non-sticky-nav]:top-[-72px]  --> top: -72px when parent has class `.non-
 group-[.non-sticky-nav]:fixed        --> position: fixed when parent has class `.non-sticky-nav`;
 group-[.non-sticky-nav]:xl:px-8      --> padding-left/right: 2rem on `xl` screens if parent has `.non-sticky-nav`;
 group-[.sticky-nav]:!top-0           --> override top to 0 if parent has `.sticky-nav`;
+```
 
 <!--  taken from https://nordvpn.com/creator/pricing/#compare-plans-desktop
 <div class="z-40 w-full transition-[top] ltr:left-0 rtl:right-0 group-[.non-sticky-nav]:top-[-72px] group-[.non-sticky-nav]:fixed group-[.non-sticky-nav]:xl:px-8 group-[.sticky-nav]:!top-0 duration-[400ms] ease-out"> 
