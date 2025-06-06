@@ -61,6 +61,7 @@ git checkout -b <newBranchName>
 
 Sample METAR Data from  
 https://aviationweather.gov/api/data/metar?ids=KRHV&format=json  
+```bash
     [{  'metar_id': 770278864, 
         'icaoId': 'KRHV', 
         'receiptTime': '2025-06-05 19:50:21', 
@@ -96,7 +97,7 @@ https://aviationweather.gov/api/data/metar?ids=KRHV&format=json
         'prior': 5, 
         'name': 'San Jose/Reid-Hillview Arpt, CA, US', 
         'clouds': [{'cover': 'SKC', 'base': None}]}]
-
+```
 
 
 CSS NOTES  
