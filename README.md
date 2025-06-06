@@ -1,24 +1,37 @@
 # FlightConditionsDashboard
 <!-- Explain what the project is and how to run it -->
+Local Development URL:
 http://127.0.0.1:8000/index.html
 
 
-<!-- recreate the environement with: -->
-<!-- conda env create -f environment.yml -->
-
-
-<!-- git remote add origin https://github.com/seanylambert/FlightConditionsDashboard.git
-git branch -M main
-git push -u origin main -->
-
-
-<!-- git checkout -b feature/setup-dashboard -->
 <!-- 
-    git add .
-    git commit -m "Initial dashboard layout"
-    git push --set-upstream origin feature/setup-dashboard -->
+## recreate the environment
+conda env create -f environment.yml
+-->
 
+<!-- 
+git remote add origin https://github.com/seanylambert/FlightConditionsDashboard.git
+git branch -M main
+git push -u origin main 
+-->
 
+<!--
+## commit a branch
+git add .
+git commit -m "<Description>"
+git push --set-upstream origin <currentBranchName>
+-->
+
+<!--
+## pull the main branch
+git checkout main          # switch to main branch
+git pull origin main       # update it with the latest
+-->
+
+<!--
+## create a new branch
+git checkout -b <newBranchName>
+-->
 
     [{  'metar_id': 770278864, 
         'icaoId': 'KRHV', 
