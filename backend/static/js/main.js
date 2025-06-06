@@ -1,3 +1,5 @@
+// static/js/main.js
+
 // JavaScript logic for fetchin and displaying weather data
 
 // Confirm script connection to html
@@ -60,4 +62,38 @@ document.getElementById("fetchBtn").addEventListener("click", () => {
       document.getElementById("metarSection").style.display = "none";
       alert("There was an error fetching the data. Try again.");
     });
+});
+
+document.getElementById('icao-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const icao = document.getElementById('icao').value.toUpperCase();
+  const response = await fetch(`http://127.0.0.1:5000/metar-history?icao=${icao}`);
+  const data = await response.json();
+
+  const container = document.getElementById('results');
+  if (data.length === 0) {
+    container.innerHTML = "<p>No historical METARs found for this station.</p>";
+    return;
+  }
+
+  const rows = data.map(m => `
+    <tr>
+      <td>${m.observation_time}</td>
+      <td>${m.temperature_c ?? '—'}</td>
+      <td>${m.wind_dir_degrees ?? '—'}</td>
+      <td>${m.wind_speed_kt ?? '—'}</td>
+      <td>${m.visibility_statute_mi ?? '—'}</td>
+    </tr>
+  `).join('');
+
+  container.innerHTML = `
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Time (UTC)</th><th>Temp (°C)</th><th>Wind Dir</th><th>Wind Speed</th><th>Visibility</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
 });
