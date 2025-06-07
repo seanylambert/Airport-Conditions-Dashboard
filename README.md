@@ -1,5 +1,8 @@
 # Airport Conditions Dashboard
 <!-- Explain what the project is and how to run it -->
+The Airport Conditions Dashboard is a web application designed to help pilots and aviation enthusiasts monitor weather conditions at airports, with a focus on METAR (Meteorological Aerodrome Reports) data. Built with Python (Flask), JavaScript, and HTML/CSS, the dashboard provides real-time and historical weather observations for selected airports, visualizes key weather metrics, and (will eventually) supports comparative analysis between airports and weather variables.
+
+
 Local Development URL:  
 http://127.0.0.1:5000
 
@@ -17,12 +20,6 @@ python backend/app.py
 Fetch and Insert METAR Data
 ```bash
 python backend/database/insert_metar.py
-
-# response
-ℹ️ No new METAR for KRHV
-ℹ️ No new METAR for KJFK
-ℹ️ No new METAR for KSJC
-⏱ Waiting 30 minutes...
 ```
 
 Recreate the Virtual Environment:
@@ -39,25 +36,28 @@ createdb -h localhost -p <port(5432)> -U postgres <databaseName>
 git remote add origin https://github.com/seanylambert/FlightConditionsDashboard.git
 git branch -M main
 git push -u origin main 
--->
 
-<!--
 ## commit a branch
 git add .
 git commit -m "<Description>"
 git push --set-upstream origin <currentBranchName>
--->
 
-<!--
 ## pull the main branch
 git checkout main          # switch to main branch
 git pull origin main       # update it with the latest
--->
 
-<!--
+## list branches
+git branch
+
 ## create a new branch
 git checkout -b <newBranchName>
--->
+
+## delete a branch
+git branch -d <branch-name>
+ -->
+
+
+
 
 Sample METAR Data from  
 https://aviationweather.gov/api/data/metar?ids=KRHV&format=json  
@@ -99,10 +99,12 @@ https://aviationweather.gov/api/data/metar?ids=KRHV&format=json
 
 
 
+
+
 CSS NOTES  
 All the styling is handled by Tailwind’s compiler, which parses the class string and generates the appropriate CSS behind the scenes.
 ```bash
-<div class="z-40 w-full transition-[top] ltr:left-0 rtl:right-0 group-[.non-sticky-nav]:top-[-72px] group-[.non-sticky-nav]:fixed group-[.non-sticky-nav]:xl:px-8 group-[.sticky-nav]:!top-0 duration-[400ms] ease-out">
+ <div class="z-40 w-full transition-[top] ltr:left-0 rtl:right-0 group-[.non-sticky-nav]:top-[-72px] group-[.non-sticky-nav]:fixed group-[.non-sticky-nav]:xl:px-8 group-[.sticky-nav]:!top-0 duration-[400ms] ease-out">
 
 z-40                             --> z-index: 40;
 w-full                           --> width: 100%;
