@@ -4,10 +4,10 @@ import requests
 import psycopg2
 import time
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 # Define your list of ICAO codes
-ICAO_CODES = ['KRHV', 'KJFK', 'KSJC']  # User can edit this list
+ICAO_CODES = ['KRHV', 'KJFK', 'KSJC', 'KE16']  # User can edit this list
 
 # Database config
 DB_CONFIG = {
@@ -127,6 +127,16 @@ def run():
             for icao in ICAO_CODES:
                 metar = fetch_metar(icao)
                 if metar and obs_time_newer(cur, icao, datetime.fromtimestamp(metar['obsTime'], tz=timezone.utc)):
+                    # Clear old most_recent flags for this station
+                    cur.execute("""
+                        UPDATE metar_reports
+                        SET most_recent = FALSE
+                        WHERE station_id = %s AND most_recent = TRUE;
+                    """, (icao,))
+
+                    # Force mostRecent flag in metar_data to True, regardless of API
+                    metar['mostRecent'] = True
+
                     insert_metar(cur, metar)
                     print(f"✅ Inserted METAR for {icao} at {metar['obsTime']}")
                 else:
@@ -139,8 +149,11 @@ def run():
         except Exception as e:
             print("❌ Error during DB operation:", e)
 
-        print("⏱ Waiting 30 minutes...")
-        time.sleep(1800)
+        now = datetime.now(timezone.utc)
+        next_fetch = now + timedelta(minutes=15)
+
+        print(f"Last Fetch: {now.strftime('%Y-%m-%d %H:%M:%S %Z')} \nNext Fetch: {next_fetch.strftime('%Y-%m-%d %H:%M:%S %Z')}")
+        time.sleep(900)
 
 if __name__ == "__main__":
     run()
