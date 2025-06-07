@@ -80,9 +80,13 @@ document.getElementById('icao-form').addEventListener('submit', async function (
     <tr>
       <td>${m.observation_time}</td>
       <td>${m.temperature_c ?? '—'}</td>
+      <td>${m.dewpoint_c ?? '-'}</td>
       <td>${m.wind_dir_degrees ?? '—'}</td>
       <td>${m.wind_speed_kt ?? '—'}</td>
       <td>${m.visibility_statute_mi ?? '—'}</td>
+      <td>${m.elevation ?? '-'}</td>
+      <td>${m.cloud_cover ?? '-'}</td>
+      <td>${m.cloud_base ?? '-'}</td>
     </tr>
   `).join('');
 
@@ -90,10 +94,77 @@ document.getElementById('icao-form').addEventListener('submit', async function (
     <table border="1">
       <thead>
         <tr>
-          <th>Time (UTC)</th><th>Temp (°C)</th><th>Wind Dir</th><th>Wind Speed</th><th>Visibility</th>
+          <th>Time (UTC)</th>
+          <th>Temp (°C)</th>
+          <th>Dewpoint (°C)</th>
+          <th>Wind Dir (°)</th>
+          <th>Wind Speed (kn)</th>
+          <th>Visibility (SM)</th>
+          <th>Elevation (m)</th>
+          <th>Cloud Cover (ft)</th>
+          <th>Cloud Base (ft)</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>
   `;
 });
+
+
+document.getElementById('icao-form2').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const icao2 = document.getElementById('icao2').value.trim().toUpperCase();
+  const response = await fetch(`http://127.0.0.1:5000/historic-rawMETAR?icao=${icao2}`);
+  const data = await response.json();
+
+  const container = document.getElementById('historic_rawMETAR_results');
+
+  if (!Array.isArray(data) || data.length === 0) {
+    container.innerHTML = "<p>No historical METARs found for this station.</p>";
+    return;
+  }
+
+  const rows = data.map(m => `
+    <tr>
+      <td>${m.observation_time || '—'}</td>
+      <td>${m.raw_text || '—'}</td>
+    </tr>
+  `).join('');
+
+  container.innerHTML = `
+    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Time (UTC)</th>
+          <th>rawMETAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
+});
+
+
+
+
+
+
+
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const input = document.getElementById('airportInput');
+//   const header = document.getElementById('metarHeader');
+
+//   input.addEventListener('input', () => {
+//     const code = input.value.toUpperCase();
+//     if (code.length === 4) {
+//       header.textContent = `Current METAR Conditions for ${code}`;
+//     } else {
+//       header.textContent = 'Current METAR Conditions';
+//     }
+//   });
+// });

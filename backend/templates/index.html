@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flight Conditions</title>
+  <title>Airport Conditions</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
 
-  <h1>Flight Conditions</h1>
+  <h1>Current METAR Report</h1>
 <div id="searchForm">
   <label for="airportInput">ICAO Code:</label>
   <br>
   <input type="text" id="airportInput" placeholder="eg. KRHV" maxlength="4" required>
-  <button id="fetchBtn">Get Conditions</button>
+  <button id="fetchBtn">Get Current Conditions</button>
 </div>
 
 <div id="metarSection" style="display: none;">
-  <h2>Current METAR Conditions</h2>
 
   <p><span id="rawMetar">Loading...</span></p>
 
@@ -35,7 +34,7 @@
   </table>
 </div>
 
-  <h1>Historic METAR</h1>
+  <h1>Historic METAR Report</h1>
 
 <form id="icao-form">
   <label for="icao">ICAO Code:</label>
@@ -46,6 +45,19 @@
 
 <div id="results">
   <!-- Historic METAR data will be inserted here -->
+</div>
+
+  <h1>Historic rawMETAR Report</h1>
+
+<form id="icao-form2">
+  <label for="icao2">ICAO Code:</label>
+  <br>
+  <input type="text" id="icao2" placeholder="eg. KRHV" required />
+  <button type="submit">Get Historic rawMETAR</button>
+</form>
+
+<div id="historic_rawMETAR_results">
+  <!-- Historic rawMETAR data will be inserted here -->
 </div>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

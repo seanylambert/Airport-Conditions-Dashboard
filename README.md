@@ -1,4 +1,4 @@
-# Flight Conditions Dashboard
+# Airport Conditions Dashboard
 <!-- Explain what the project is and how to run it -->
 Local Development URL:  
 http://127.0.0.1:5000
