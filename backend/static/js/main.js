@@ -1,4 +1,5 @@
 // static/js/main.js
+const BASE_URL = 'http://127.0.0.1:5000'; // for development
 
 // JavaScript logic for fetchin and displaying weather data
 
@@ -22,7 +23,7 @@ document.getElementById("fetchBtn").addEventListener("click", () => {
     return;
   }
 
-  const apiUrl = `http://127.0.0.1:5000/metar?station=${icaoCode}`;
+  const apiUrl = `${BASE_URL}/metar?station=${icaoCode}`;
 
   fetch(apiUrl)
     .then(response => response.json())
@@ -67,7 +68,7 @@ document.getElementById("fetchBtn").addEventListener("click", () => {
 document.getElementById('icao-form').addEventListener('submit', async function (e) {
   e.preventDefault();
   const icao = document.getElementById('icao').value.toUpperCase();
-  const response = await fetch(`http://127.0.0.1:5000/metar-history?icao=${icao}`);
+  const response = await fetch(`${BASE_URL}/metar-history?icao=${icao}`);
   const data = await response.json();
 
   const container = document.getElementById('results');
@@ -114,9 +115,12 @@ document.getElementById('icao-form').addEventListener('submit', async function (
 document.getElementById('icao-form2').addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const icao2 = document.getElementById('icao2').value.trim().toUpperCase();
-  const response = await fetch(`http://127.0.0.1:5000/historic-rawMETAR?icao=${icao2}`);
+  const icao = document.getElementById('icao2').value.trim().toUpperCase();
+  const startDateInput = document.getElementById('startDate').value;
+  const endDateInput = document.getElementById('endDate').value;
+  const response = await fetch(`${BASE_URL}/historic-rawMETAR?icao=${icao}&startDateInput=${startDateInput}&endDateInput=${endDateInput}`);
   const data = await response.json();
+  console.log(data)
 
   const container = document.getElementById('historic_rawMETAR_results');
 
@@ -149,8 +153,26 @@ document.getElementById('icao-form2').addEventListener('submit', async function 
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  const today = new Date().toISOString().split("T")[0];
 
+  const endDateInput = document.getElementById("endDate");
+  const startDateInput = document.getElementById("startDate");
 
+  if (endDateInput) {
+    endDateInput.max = today;
+    endDateInput.value = today;
+  }
+
+  if (startDateInput) {
+    startDateInput.max = today;
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    startDateInput.value = sevenDaysAgo.toISOString().split("T")[0];
+  }
+
+  // ... add any other DOM logic
+});
 
 
 

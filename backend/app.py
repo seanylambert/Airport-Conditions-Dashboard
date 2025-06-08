@@ -97,6 +97,9 @@ def metar_history():
 @app.route("/historic-rawMETAR")
 def raw_metar_history():
     icao_raw = request.args.get('icao')
+    startDate = request.args.get('startDateInput')
+    endDate = request.args.get('endDateInput')
+    
     if not icao_raw:
         return jsonify({"error": "Missing ICAO code"}), 400
     icao = icao_raw.upper()
@@ -109,9 +112,10 @@ def raw_metar_history():
             SELECT observation_time, raw_text
             FROM metar_reports
             WHERE station_id = %s
+                    AND DATE(observation_time) BETWEEN %s AND %s
             ORDER BY observation_time DESC
-            LIMIT 20;
-        """, (icao,))
+            LIMIT 100;
+        """, (icao, startDate, endDate))
 
         rows = cur.fetchall()        
         conn.close()
